@@ -4,7 +4,7 @@ Employeeasy Server is the backend to the employeeasy app. It provides a MondoDB 
 
 ## Installation
 
-To try out the API, you can:
+To try out the API, you can contact me and I can grant you access to the collection. After that:
 
 - clone this repo on your local machine
 - run `npm install`
