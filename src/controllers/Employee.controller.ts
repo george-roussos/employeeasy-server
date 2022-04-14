@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { verifyJwt, getTokenFrom } from "../utils/jwt.util";
+import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Employee from "../models/Employee.model";
 import User from "../models/User.model";
@@ -6,7 +8,15 @@ import User from "../models/User.model";
 const createEmployee = async (req: Request, res: Response) => {
   const { name, phone, email, department, startDate, employmentType, manager } =
     req.body;
+  const token = getTokenFrom(req);
+  const decodedToken = verifyJwt(token!);
   const user = await User.findOne({ name: manager });
+  if (
+    !decodedToken._doc._id ||
+    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)
+  ) {
+    return res.status(401).json({ error: "Permission denied" });
+  }
   const employee = new Employee({
     _id: new mongoose.Types.ObjectId(),
     name: name,
@@ -52,7 +62,16 @@ const readAllEmployees = async (req: Request, res: Response) => {
   }
 };
 
-const updateEmployee = (req: Request, res: Response) => {
+const updateEmployee = async (req: Request, res: Response) => {
+  const token = getTokenFrom(req);
+  const decodedToken = verifyJwt(token!);
+  const user = await User.findOne({ name: req.body.manager });
+  if (
+    !decodedToken._doc._id ||
+    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)
+  ) {
+    return res.status(401).json({ error: "Permission denied" });
+  }
   const employeeId = req.params.employeeId;
   return Employee.findById(employeeId)
     .then((employee) => {
@@ -75,6 +94,14 @@ const deleteEmployee = async (
   res: Response,
   next: NextFunction
 ) => {
+  const token = getTokenFrom(req);
+  const decodedToken = verifyJwt(token!);
+  if (
+    !decodedToken._doc._id ||
+    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)
+  ) {
+    return res.status(401).json({ error: "Permission denied" });
+  }
   const employeeId = req.params.employeeId;
   try {
     const employee = await Employee.findByIdAndDelete(employeeId);
