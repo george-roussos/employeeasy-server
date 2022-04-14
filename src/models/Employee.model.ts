@@ -34,7 +34,7 @@ const EmployeeSchema: Schema = new Schema(
       type: String,
       required: true,
       validate: {
-        validator: function (v) {
+        validator: function (v: string) {
           return /^(\d){4}-(\d){2}-(\d){2}/.test(v);
         },
         message: "Please enter start date in format YYYY-MM-DD",
