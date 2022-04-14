@@ -1,6 +1,6 @@
 # Employeeasy Server
 
-Employeeasy Server is the backend to the employeeasy app. It provides a MondoDB database, which contains all data the employeeasy app uses to run.
+Employeeasy Server is the backend to the employeeasy app. It connects to a MondoDB database, which contains all data the employeeasy app uses to run.
 
 ## Installation
 
@@ -57,9 +57,11 @@ See 'Endpoints' section for more information (WIP).
 
 ## Endpoint specifications
 
-To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections.
+To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections. The idea is that the manager inputs their own name in the "manager" field when inputting new employee entries and that is when the API will allow a POST request.
 
-The API uses JWT authentication, so requests that involve employees that do not reference the logged in user, are rejected. Below are the endpoints.
+The API uses JWT authentication, so requests that involve employees that do not reference the logged in user, are rejected.
+
+Below are the endpoints.
 
 ### POST `/api/login`
 
@@ -212,4 +214,4 @@ The API uses JWT authentication, so requests that involve employees that do not 
 
 ## Tech Stack
 
-The Employeeasy Server is written in NodeJS (TypeScript) and Express. It connects to a MongoDB instance using Mongoose.
+The Employeeasy Server utilizes Node.js (in TypeScript) and Express. It connects to a MongoDB instance using Mongoose. Schema validation is performed using Joi.

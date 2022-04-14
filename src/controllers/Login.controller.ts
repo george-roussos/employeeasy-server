@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { validatePassword } from "../service/login.service";
-import { signJwt } from "../utils/jwt.util";
 import { config } from "../config/config";
+import { signJwt } from "../utils/jwt.util";
+import { validatePassword } from "../service/login.service";
 
 const loginUser = async (req: Request, res: Response) => {
   const user = await validatePassword(req.body);

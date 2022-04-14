@@ -1,8 +1,8 @@
 import Joi, { ObjectSchema } from "joi";
 import { Request, Response, NextFunction } from "express";
-import logger from "../utils/Logging";
 import { IEmployee } from "../models/Employee.model";
 import { IUser } from "../models/User.model";
+import logger from "../utils/Logging";
 
 export const ValidateSchema = (schema: ObjectSchema) => {
   return async (req: Request, res: Response, next: NextFunction) => {

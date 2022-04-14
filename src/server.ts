@@ -2,11 +2,11 @@ import express from "express";
 import http from "http";
 import mongoose from "mongoose";
 import { config } from "./config/config";
-import logger from "./utils/Logging";
 import { Request, Response, NextFunction } from "express";
+import logger from "./utils/Logging";
 import employeeRoutes from "./routes/Employee";
-import userRoutes from "./routes/User";
 import loginRoutes from "./routes/Login";
+import userRoutes from "./routes/User";
 
 const router = express();
 

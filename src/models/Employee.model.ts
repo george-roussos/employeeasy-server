@@ -30,7 +30,16 @@ const EmployeeSchema: Schema = new Schema(
       },
     },
     department: { type: String, required: true },
-    startDate: { type: String, required: true },
+    startDate: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (v) {
+          return /^(\d){4}-(\d){2}-(\d){2}/.test(v);
+        },
+        message: "Please enter start date in format YYYY-MM-DD",
+      },
+    },
     employmentType: { type: String, required: true },
     manager: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },

@@ -1,6 +1,6 @@
 import express from "express";
-import { Schemas, ValidateSchema } from "../middleware/ValidateSchema";
 import controller from "../controllers/Employee.controller";
+import { Schemas, ValidateSchema } from "../middleware/ValidateSchema";
 
 const router = express.Router();
 
