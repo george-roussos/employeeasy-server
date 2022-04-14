@@ -56,9 +56,9 @@ const StartServer = () => {
 
   /** Routes */
 
-  router.use("/employees", employeeRoutes);
-  router.use("/users", userRoutes);
-  router.use("/login", loginRoutes);
+  router.use("/api/employees", employeeRoutes);
+  router.use("/api/users", userRoutes);
+  router.use("/api/login", loginRoutes);
 
   /** Healthcheck */
   router.get("/healthz", (req, res, next) =>

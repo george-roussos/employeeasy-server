@@ -7,6 +7,7 @@ export interface IUser {
   email: string;
   password: string;
   passwordConfirmation: string;
+  employees: [];
 }
 
 export interface IUserModel extends IUser, Document {
@@ -33,6 +34,7 @@ const UserSchema: Schema = new Schema(
       },
     },
     password: { type: String, required: true },
+    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }],
   },
   { versionKey: false, timestamps: true }
 );

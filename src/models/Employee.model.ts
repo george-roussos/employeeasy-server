@@ -7,6 +7,7 @@ export interface IEmployee {
   department: string;
   startDate: string;
   employmentType: string;
+  manager: string;
 }
 
 export interface IEmployeeModel extends IEmployee, Document {}
@@ -31,6 +32,7 @@ const EmployeeSchema: Schema = new Schema(
     department: { type: String, required: true },
     startDate: { type: String, required: true },
     employmentType: { type: String, required: true },
+    manager: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { versionKey: false }
 );

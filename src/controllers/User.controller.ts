@@ -37,7 +37,7 @@ const readAllUsers = async (
   next: NextFunction
 ) => {
   try {
-    const users = await User.find();
+    const users = await User.find({}).populate("employees", { name: 1 });
     return users
       ? res.status(200).json({ users })
       : res.status(404).json({ message: "Not found" });
