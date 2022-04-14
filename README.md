@@ -57,6 +57,21 @@ See 'Endpoints' section for more information (WIP).
 
 ## Endpoint specifications
 
+### POST `/api/login`
+
+```
+// req.body
+{
+  username: String,
+  password: String,
+}
+
+// res.body
+{
+  accessToken: String,
+}
+```
+
 ### GET `/api/users`
 
 ```
@@ -71,21 +86,6 @@ See 'Endpoints' section for more information (WIP).
   updatedAt: String
  }
 ]
-```
-
-### POST `/api/login`
-
-```
-// req.body
-{
-  username: String,
-  password: String,
-}
-
-// res.body
-{
-  accessToken: String,
-}
 ```
 
 ### GET `/api/users/:userId`
@@ -122,6 +122,77 @@ See 'Endpoints' section for more information (WIP).
 ```
 
 ### PUT `/api/users/:userId`
+
+```
+// req.params
+{
+  userId: Integer
+}
+
+// res.body
+{
+  status: 200
+}
+```
+
+### GET `/api/employees`
+
+```
+// res.body
+[
+ {
+  _id: String,
+  name: String,
+  email: String,
+  phone: String,
+  department: String,
+  startDate: String,
+  employmentType: String,
+  manager: Array,
+  createdAt: String,
+  updatedAt: String
+ }
+]
+```
+
+### GET `/api/employees/:userId`
+
+```
+// req.params
+{
+  userId: String
+}
+
+// res.body
+{
+  _id: String,
+  name: String,
+  email: String,
+  phone: String,
+  department: String,
+  startDate: String,
+  employmentType: String,
+  manager: Array,
+  createdAt: String,
+  updatedAt: String
+}
+```
+
+### DELETE `/api/employees/:userId`
+
+```
+// req.params
+{
+  userId: String
+}
+
+// res.body
+{
+  status: 200
+}
+```
+
+### PUT `/api/employees/:userId`
 
 ```
 // req.params
