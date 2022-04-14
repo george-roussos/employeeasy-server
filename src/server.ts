@@ -2,9 +2,11 @@ import express from "express";
 import http from "http";
 import mongoose from "mongoose";
 import { config } from "./config/config";
-import logger from "./library/Logging";
+import logger from "./utils/Logging";
 import { Request, Response, NextFunction } from "express";
 import employeeRoutes from "./routes/Employee";
+import userRoutes from "./routes/User";
+import loginRoutes from "./routes/Login";
 
 const router = express();
 
@@ -55,10 +57,12 @@ const StartServer = () => {
   /** Routes */
 
   router.use("/employees", employeeRoutes);
+  router.use("/users", userRoutes);
+  router.use("/login", loginRoutes);
 
   /** Healthcheck */
   router.get("/healthz", (req, res, next) =>
-    res.status(200).json({ message: "Running" })
+    res.status(200).json({ message: "OK" })
   );
 
   /** Error handling if request does not bounce against a valid route */

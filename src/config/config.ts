@@ -8,6 +8,10 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD || "";
 
 const MONGO_URL = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.meh6u.mongodb.net/employeeasy`;
 
+const PUBLIC_KEY = `${process.env.PUBLIC_KEY}`;
+
+const PRIVATE_KEY = `${process.env.PRIVATE_KEY}`;
+
 const SERVER_PORT = process.env.SERVER_PORT
   ? Number(process.env.SERVER_PORT)
   : 3001;
@@ -18,5 +22,9 @@ export const config = {
   },
   server: {
     port: SERVER_PORT,
+  },
+  user: {
+    publicKey: PUBLIC_KEY,
+    privateKey: PRIVATE_KEY,
   },
 };
