@@ -4,7 +4,12 @@ Employeeasy Server is the backend to the employeeasy app. It provides a MondoDB 
 
 ## Installation
 
-If you want to try the API out:
+If you want to try the API out, you can use the following credentials when logging in:
+
+- username: "malinholmgren"
+- password: "12345"
+
+To try out the API, you can:
 
 - clone this repo on your local machine
 - run `npm install`
@@ -56,6 +61,10 @@ See 'Endpoints' section for more information (WIP).
 ```
 
 ## Endpoint specifications
+
+To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections.
+
+The API uses JWT authentication, so requests that involve employees that do not reference the logged in user, are rejected. Below are the endpoints.
 
 ### POST `/api/login`
 
