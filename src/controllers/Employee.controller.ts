@@ -3,7 +3,7 @@ import { verifyJwt, getTokenFrom } from "../utils/jwt.util";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Employee from "../models/Employee.model";
-import User from "../models/User.model";
+import User, { IUser } from "../models/User.model";
 
 const createEmployee = async (req: Request, res: Response) => {
   const { name, phone, email, department, startDate, employmentType, manager } =
@@ -13,7 +13,7 @@ const createEmployee = async (req: Request, res: Response) => {
   const user = await User.findOne({ name: manager });
   if (
     !decodedToken._doc._id ||
-    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)
+    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user!._id)
   ) {
     return res.status(401).json({ error: "Permission denied" });
   }
@@ -29,8 +29,8 @@ const createEmployee = async (req: Request, res: Response) => {
   });
   try {
     await employee.save();
-    user.employees = user.employees.concat(employee._id);
-    await user.save();
+    user.employees = user!.employees.concat(employee._id);
+    await user!.save();
     return res.status(201).json({ employee });
   } catch (error) {
     return res.status(500).json({ error });

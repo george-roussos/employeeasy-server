@@ -4,11 +4,6 @@ Employeeasy Server is the backend to the employeeasy app. It provides a MondoDB 
 
 ## Installation
 
-If you want to try the API out, you can use the following credentials when logging in:
-
-- username: "malinholmgren"
-- password: "12345"
-
 To try out the API, you can:
 
 - clone this repo on your local machine
