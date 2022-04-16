@@ -214,4 +214,4 @@ Below are the endpoints.
 
 ## Tech Stack
 
-The Employeeasy Server utilizes Node.js (in TypeScript) and Express. It connects to a MongoDB instance using Mongoose. Schema validation is performed using Joi.
+The Employeeasy Server utilizes Node.js (in TypeScript) and Express. It connects to a MongoDB instance using Mongoose. Schema validation is performed using Joi. Testing is performed using Jest.
