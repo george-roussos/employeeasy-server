@@ -79,3 +79,5 @@ const StartServer = () => {
       logger.info(`Server running on port ${config.server.port}`)
     );
 };
+
+export default router;

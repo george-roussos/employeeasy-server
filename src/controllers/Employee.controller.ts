@@ -29,7 +29,7 @@ const createEmployee = async (req: Request, res: Response) => {
   });
   try {
     await employee.save();
-    user.employees = user!.employees.concat(employee._id);
+    if (user) user.employees = user!.employees.concat(employee._id);
     await user!.save();
     return res.status(201).json({ employee });
   } catch (error) {
@@ -96,6 +96,7 @@ const deleteEmployee = async (
 ) => {
   const token = getTokenFrom(req);
   const decodedToken = verifyJwt(token!);
+  const user = await User.findById(req.params.employeeId);
   if (
     !decodedToken._doc._id ||
     JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)

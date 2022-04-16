@@ -7,7 +7,7 @@ export interface IUser {
   email: string;
   password: string;
   passwordConfirmation: string;
-  employees: [];
+  employees: any[];
 }
 
 export interface IUserModel extends IUser, Document {
