@@ -97,7 +97,6 @@ describe("when logged in", () => {
   });
 
   test("adding an employee under another manager fails", async () => {
-    const initialResponse = await api.get("/api/employees");
     const newEmployee = {
       name: "Olivia Andersson",
       phone: "+46721234567",
