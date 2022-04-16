@@ -2,37 +2,9 @@ import router from "../src/server";
 import mongoose from "mongoose";
 import supertest from "supertest";
 import User from "../src/models/User.model";
-import Employee from "../src/models/User.model";
-import { Response } from "express";
+import initialUsers from "./test_helper";
 
 const api = supertest(router);
-
-const initialUsers = [
-  {
-    name: "Anna Forsberg",
-    username: "annaforsberg",
-    email: "annafors@gmail.com",
-    password: "12345",
-    passwordConfirmation: "12345",
-    _id: "62385f217d76da5ce81bb423",
-  },
-  {
-    name: "Eva Borg",
-    username: "evaborg",
-    email: "evaborg@gmail.com",
-    password: "12345",
-    passwordConfirmation: "12345",
-    _id: "62385f217d76da5ce81bb424",
-  },
-  {
-    name: "Johan Bly",
-    username: "johanbly",
-    email: "johanbly@gmail.com",
-    password: "12345",
-    passwordConfirmation: "12345",
-    _id: "62385f217d76da5ce81bb425",
-  },
-];
 
 let authToken = "";
 
@@ -94,7 +66,9 @@ describe("when some users do exist", () => {
     };
     await api.post("/api/login").send(credentials).expect(401);
   });
+});
 
+describe("when logged in", () => {
   test("adding an employee works", async () => {
     const initialResponse = await api.get("/api/employees");
     const initialEmployees = initialResponse.body.employees.map((r: any) => r);
