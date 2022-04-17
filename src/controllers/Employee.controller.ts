@@ -6,15 +6,13 @@ import Employee from "../models/Employee.model";
 import User, { IUser } from "../models/User.model";
 
 const createEmployee = async (req: Request, res: Response) => {
-  const { name, phone, email, department, startDate, employmentType, manager } =
+  const { name, phone, email, department, startDate, employmentType } =
     req.body;
   const token = getTokenFrom(req);
   const decodedToken = verifyJwt(token!);
+  const manager = decodedToken._doc.name;
   const user = await User.findOne({ name: manager });
-  if (
-    !decodedToken._doc._id ||
-    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user!._id)
-  ) {
+  if (!decodedToken._doc._id) {
     return res.status(401).json({ error: "Permission denied" });
   }
   const employee = new Employee({
@@ -65,7 +63,8 @@ const readAllEmployees = async (req: Request, res: Response) => {
 const updateEmployee = async (req: Request, res: Response) => {
   const token = getTokenFrom(req);
   const decodedToken = verifyJwt(token!);
-  const user = await User.findOne({ name: req.body.manager });
+  const manager = decodedToken._doc.name;
+  const user = await User.findOne({ name: manager });
   if (
     !decodedToken._doc._id ||
     JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)

@@ -25,7 +25,6 @@ export const Schemas = {
       department: Joi.string().required(),
       startDate: Joi.string().required(),
       employmentType: Joi.string().required(),
-      manager: Joi.string().required(),
     }),
     update: Joi.object<IEmployee>({
       name: Joi.string().required(),

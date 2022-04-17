@@ -79,7 +79,6 @@ describe("when logged in", () => {
       department: "Finance",
       startDate: "2019-08-01",
       employmentType: "Permanent",
-      manager: "Anna Forsberg",
     };
     await api
       .post("/api/employees")
@@ -94,23 +93,6 @@ describe("when logged in", () => {
 
     expect(contents).toHaveLength(initialEmployees.length + 1);
     expect(contents).toContain("Olivia Andersson");
-  });
-
-  test("adding an employee under another manager fails", async () => {
-    const newEmployee = {
-      name: "Olivia Andersson",
-      phone: "+46721234567",
-      email: "oliviaandersson@gmail.com",
-      department: "Finance",
-      startDate: "2019-08-01",
-      employmentType: "Permanent",
-      manager: "Eva Borg",
-    };
-    await api
-      .post("/api/employees")
-      .send(newEmployee)
-      .set("Authorization", `bearer ${authToken}`)
-      .expect(401);
   });
 });
 
