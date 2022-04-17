@@ -57,12 +57,6 @@ See 'Endpoints' section for more information (WIP).
 
 ## Endpoint specifications
 
-To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections. The idea is that the manager inputs their own name in the "manager" field when inputting new employee entries and that is when the API will allow a POST request.
-
-The API uses JWT authentication, so requests that involve employees that do not reference the logged in user, are rejected.
-
-Below are the endpoints.
-
 ### POST `/api/login`
 
 ```
@@ -211,6 +205,10 @@ Below are the endpoints.
   status: 200
 }
 ```
+
+## Creating and Editing Employees
+
+To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections. When performing a `POST` request to `/api/employees`, the employee is added under the corresponding manager (which is inferred based on the logged in user). In conjuction with the frontend, only employees of this manager's line are displayed. `DELETE` or `PUT` requests that provide the correct `:id` but involve a different manager are not allowed (the API leverages JWT authentication).
 
 ## Tech Stack
 
