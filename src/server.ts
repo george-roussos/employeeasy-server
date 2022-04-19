@@ -5,7 +5,9 @@ import { config } from "./config/config";
 import { Request, Response, NextFunction } from "express";
 import logger from "./utils/Logging";
 import employeeRoutes from "./routes/Employee";
+import expenseRoutes from "./routes/Expense";
 import loginRoutes from "./routes/Login";
+import vacationRoutes from "./routes/Vacation";
 import userRoutes from "./routes/User";
 
 const router = express();
@@ -57,6 +59,8 @@ const StartServer = () => {
   /** Routes */
 
   router.use("/api/employees", employeeRoutes);
+  router.use("/api/expenses", expenseRoutes);
+  router.use("/api/vacation", vacationRoutes);
   router.use("/api/users", userRoutes);
   router.use("/api/login", loginRoutes);
 

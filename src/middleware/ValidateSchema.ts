@@ -1,6 +1,8 @@
 import Joi, { ObjectSchema } from "joi";
 import { Request, Response, NextFunction } from "express";
 import { IEmployee } from "../models/Employee.model";
+import { IExpense } from "../models/Expense.model";
+import { IVacation } from "../models/Vacation.model";
 import { IUser } from "../models/User.model";
 import logger from "../utils/Logging";
 
@@ -55,6 +57,40 @@ export const Schemas = {
         .min(5)
         .required()
         .valid(Joi.ref("password")),
+    }),
+  },
+  expense: {
+    create: Joi.object<IExpense>({
+      date: Joi.string().required(),
+      merchant: Joi.string().required(),
+      amount: Joi.number().required(),
+      currency: Joi.string().required(),
+      employee: Joi.string().required(),
+      status: Joi.string().required(),
+    }),
+    update: Joi.object<IExpense>({
+      date: Joi.string().required(),
+      merchant: Joi.string().required(),
+      amount: Joi.number().required(),
+      currency: Joi.string().required(),
+      employee: Joi.string().required(),
+      status: Joi.string().required(),
+    }),
+  },
+  vacation: {
+    create: Joi.object<IVacation>({
+      employee: Joi.string().required(),
+      startOn: Joi.string().required(),
+      endOn: Joi.string().required(),
+      daysLeft: Joi.number().required(),
+      status: Joi.string().required(),
+    }),
+    update: Joi.object<IVacation>({
+      employee: Joi.string().required(),
+      startOn: Joi.string().required(),
+      endOn: Joi.string().required(),
+      daysLeft: Joi.number().required(),
+      status: Joi.string().required(),
     }),
   },
 };
