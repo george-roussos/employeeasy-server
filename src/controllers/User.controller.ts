@@ -3,13 +3,14 @@ import { NextFunction, Request, Response } from "express";
 import User from "../models/User.model";
 
 const createUser = async (req: Request, res: Response) => {
-  const { name, email, username, password } = req.body;
+  const { name, email, username, password, avatar } = req.body;
   const user = new User({
     _id: new mongoose.Types.ObjectId(),
     name: name,
     username: username,
     email: email,
     password: password,
+    avatar: avatar ? avatar : undefined,
   });
   try {
     await user.save();
@@ -31,11 +32,7 @@ const readUser = async (req: Request, res: Response) => {
   }
 };
 
-const readAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const readAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find({}).populate("employees", { name: 1 });
     return users

@@ -8,8 +8,8 @@ export interface IUser {
   password: string;
   passwordConfirmation: string;
   employees: any[];
+  avatar: string;
 }
-
 export interface IUserModel extends IUser, Document {
   createdAt: Date;
   updatedAt: Date;
@@ -35,6 +35,7 @@ const UserSchema: Schema = new Schema(
     },
     password: { type: String, required: true },
     employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }],
+    avatar: { type: String },
   },
   { versionKey: false, timestamps: true }
 );

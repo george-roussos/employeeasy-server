@@ -8,6 +8,7 @@ export interface IEmployee {
   startDate: string;
   employmentType: string;
   manager: string;
+  avatar: string;
 }
 
 export interface IEmployeeModel extends IEmployee, Document {}
@@ -42,6 +43,7 @@ const EmployeeSchema: Schema = new Schema(
     },
     employmentType: { type: String, required: true },
     manager: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    avatar: { type: String },
   },
   { versionKey: false }
 );

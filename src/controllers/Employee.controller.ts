@@ -6,7 +6,7 @@ import Employee from "../models/Employee.model";
 import User, { IUser } from "../models/User.model";
 
 const createEmployee = async (req: Request, res: Response) => {
-  const { name, phone, email, department, startDate, employmentType } =
+  const { name, phone, email, department, startDate, employmentType, avatar } =
     req.body;
   const token = getTokenFrom(req);
   const decodedToken = verifyJwt(token!);
@@ -24,6 +24,7 @@ const createEmployee = async (req: Request, res: Response) => {
     startDate: startDate,
     employmentType: employmentType,
     manager: user ? user._id : undefined,
+    avatar: avatar ? avatar : undefined,
   });
   try {
     await employee.save();

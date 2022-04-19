@@ -27,6 +27,7 @@ export const Schemas = {
       department: Joi.string().required(),
       startDate: Joi.string().required(),
       employmentType: Joi.string().required(),
+      avatar: Joi.string(),
     }),
     update: Joi.object<IEmployee>({
       name: Joi.string().required(),
@@ -35,6 +36,7 @@ export const Schemas = {
       department: Joi.string().required(),
       startDate: Joi.string().required(),
       employmentType: Joi.string().required(),
+      avatar: Joi.string(),
     }),
   },
   user: {
@@ -42,6 +44,7 @@ export const Schemas = {
       name: Joi.string().required(),
       username: Joi.string().required(),
       email: Joi.string().required(),
+      avatar: Joi.string(),
       password: Joi.string().min(5).required(),
       passwordConfirmation: Joi.string()
         .min(5)
@@ -50,8 +53,9 @@ export const Schemas = {
     }),
     update: Joi.object<IUser>({
       name: Joi.string(),
-      username: Joi.string(),
+      username: Joi.string().required,
       email: Joi.string(),
+      avatar: Joi.string(),
       password: Joi.string().required(),
       passwordConfirmation: Joi.string()
         .min(5)
