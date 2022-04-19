@@ -12,7 +12,7 @@ const loginUser = async (req: Request, res: Response) => {
     { ...user, privateKey: config.user.privateKey },
     { expiresIn: 60 * 60 }
   );
-  res.send(accessToken);
+  res.send({ user, accessToken });
 };
 
 export default {

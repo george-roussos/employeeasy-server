@@ -6,8 +6,16 @@ import Employee from "../models/Employee.model";
 import User, { IUser } from "../models/User.model";
 
 const createEmployee = async (req: Request, res: Response) => {
-  const { name, phone, email, department, startDate, employmentType, avatar } =
-    req.body;
+  const {
+    name,
+    phone,
+    email,
+    department,
+    startDate,
+    country,
+    employmentType,
+    avatar,
+  } = req.body;
   const token = getTokenFrom(req);
   const decodedToken = verifyJwt(token!);
   const manager = decodedToken._doc.name;
@@ -20,6 +28,7 @@ const createEmployee = async (req: Request, res: Response) => {
     name: name,
     phone: phone,
     email: email,
+    country: country,
     department: department,
     startDate: startDate,
     employmentType: employmentType,
@@ -89,17 +98,15 @@ const updateEmployee = async (req: Request, res: Response) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-const deleteEmployee = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const deleteEmployee = async (req: Request, res: Response) => {
   const token = getTokenFrom(req);
   const decodedToken = verifyJwt(token!);
-  const user = await User.findById(req.params.employeeId);
+  const employee = await Employee.findById(req.params.employeeId);
+  const managerOfEmployee = await User.findById(employee.manager);
   if (
     !decodedToken._doc._id ||
-    JSON.stringify(decodedToken._doc._id) !== JSON.stringify(user._id)
+    JSON.stringify(decodedToken._doc._id) !==
+      JSON.stringify(managerOfEmployee._id)
   ) {
     return res.status(401).json({ error: "Permission denied" });
   }

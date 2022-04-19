@@ -5,6 +5,7 @@ export interface IEmployee {
   phone: string;
   email: string;
   department: string;
+  country: string;
   startDate: string;
   employmentType: string;
   manager: string;
@@ -31,6 +32,7 @@ const EmployeeSchema: Schema = new Schema(
       },
     },
     department: { type: String, required: true },
+    country: { type: String, required: true },
     startDate: {
       type: String,
       required: true,
