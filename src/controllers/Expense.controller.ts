@@ -36,7 +36,10 @@ const readExpense = async (req: Request, res: Response) => {
 
 const readAllExpenses = async (req: Request, res: Response) => {
   try {
-    const expenses = await Expense.find({}).populate("employee", { name: 1 });
+    const expenses = await Expense.find({}).populate("employee", {
+      name: 1,
+      avatar: 1,
+    });
     return expenses
       ? res.status(200).json({ expenses })
       : res.status(404).json({ message: "Not found" });
