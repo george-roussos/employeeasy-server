@@ -1,9 +1,10 @@
 import Joi, { ObjectSchema } from "joi";
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
+
 import { IEmployee } from "../models/Employee.model";
 import { IExpense } from "../models/Expense.model";
-import { IVacation } from "../models/Vacation.model";
 import { IUser } from "../models/User.model";
+import { IVacation } from "../models/Vacation.model";
 import logger from "../utils/Logging";
 
 export const ValidateSchema = (schema: ObjectSchema) => {

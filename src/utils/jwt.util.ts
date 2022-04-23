@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
-import { config } from "../config/config";
 import { Request } from "express";
+import { config } from "../config/config";
+import jwt from "jsonwebtoken";
 
 const privateKey: string = config.user.privateKey;
 const publicKey: string = config.user.publicKey;

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+
 import { config } from "../config/config";
 import { signJwt } from "../utils/jwt.util";
 import { validatePassword } from "../service/login.service";

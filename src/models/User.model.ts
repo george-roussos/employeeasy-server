@@ -1,5 +1,6 @@
-import bcrypt from "bcrypt";
 import mongoose, { Document, Schema } from "mongoose";
+
+import bcrypt from "bcrypt";
 
 export interface IUser {
   username: string;

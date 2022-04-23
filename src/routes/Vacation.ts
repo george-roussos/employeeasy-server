@@ -1,6 +1,7 @@
-import express from "express";
-import controller from "../controllers/Vacation.controller";
 import { Schemas, ValidateSchema } from "../middleware/ValidateSchema";
+
+import controller from "../controllers/Vacation.controller";
+import express from "express";
 
 const router = express.Router();
 

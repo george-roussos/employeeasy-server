@@ -1,14 +1,15 @@
-import express from "express";
-import http from "http";
-import mongoose from "mongoose";
+import { NextFunction, Request, Response } from "express";
+
 import { config } from "./config/config";
-import { Request, Response, NextFunction } from "express";
-import logger from "./utils/Logging";
 import employeeRoutes from "./routes/Employee";
 import expenseRoutes from "./routes/Expense";
+import express from "express";
+import http from "http";
+import logger from "./utils/Logging";
 import loginRoutes from "./routes/Login";
-import vacationRoutes from "./routes/Vacation";
+import mongoose from "mongoose";
 import userRoutes from "./routes/User";
+import vacationRoutes from "./routes/Vacation";
 
 const router = express();
 

@@ -1,14 +1,11 @@
-import express from "express";
-import controller from "../controllers/User.controller";
 import { Schemas, ValidateSchema } from "../middleware/ValidateSchema";
+
+import controller from "../controllers/User.controller";
+import express from "express";
 
 const router = express.Router();
 
-router.post(
-  "/",
-  ValidateSchema(Schemas.user.create),
-  controller.createUser
-);
+router.post("/", ValidateSchema(Schemas.user.create), controller.createUser);
 router.get("/", controller.readAllUsers);
 router.get("/:userId", controller.readUser);
 router.put(

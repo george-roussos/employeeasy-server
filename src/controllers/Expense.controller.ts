@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
 import { Request, Response } from "express";
-import Expense from "../models/Expense.model";
+
 import Employee from "../models/Employee.model";
+import Expense from "../models/Expense.model";
+import mongoose from "mongoose";
 
 const createExpense = async (req: Request, res: Response) => {
   const { date, merchant, amount, currency, employee, status } = req.body;

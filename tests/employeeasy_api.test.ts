@@ -1,8 +1,8 @@
-import router from "../src/server";
-import mongoose from "mongoose";
-import supertest from "supertest";
 import User from "../src/models/User.model";
 import initialUsers from "./test_helper";
+import mongoose from "mongoose";
+import router from "../src/server";
+import supertest from "supertest";
 
 const api = supertest(router);
 

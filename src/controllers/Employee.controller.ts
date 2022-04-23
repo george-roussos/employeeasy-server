@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { verifyJwt, getTokenFrom } from "../utils/jwt.util";
+import User, { IUser } from "../models/User.model";
+import { getTokenFrom, verifyJwt } from "../utils/jwt.util";
+
+import Employee from "../models/Employee.model";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import Employee from "../models/Employee.model";
-import User, { IUser } from "../models/User.model";
 
 const createEmployee = async (req: Request, res: Response) => {
   const {

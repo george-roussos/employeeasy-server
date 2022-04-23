@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
 import { Request, Response } from "express";
-import Vacation from "../models/Vacation.model";
+
 import Employee from "../models/Employee.model";
+import Vacation from "../models/Vacation.model";
+import mongoose from "mongoose";
 
 const createVacation = async (req: Request, res: Response) => {
   const { employee, startOn, endOn, daysLeft, status } = req.body;
@@ -35,7 +36,10 @@ const readVacation = async (req: Request, res: Response) => {
 
 const readAllVacations = async (req: Request, res: Response) => {
   try {
-    const vacations = await Vacation.find({}).populate("employee", { name: 1 });
+    const vacations = await Vacation.find({}).populate("employee", {
+      name: 1,
+      avatar: 1,
+    });
     return vacations
       ? res.status(200).json({ vacations })
       : res.status(404).json({ message: "Not found" });
