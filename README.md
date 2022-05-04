@@ -1,6 +1,6 @@
 # Employeeasy Server
 
-Employeeasy Server is the backend to the employeeasy app. It connects to a MondoDB database, which contains all data the employeeasy app uses to run.
+Employeeasy Server is the backend to the employeeasy app. It connects to a MongoDB database, which contains all data the employeeasy app uses to run.
 
 ## Installation
 
@@ -13,9 +13,11 @@ To try out the API, you can contact me and I can grant you access to the collect
 
 ## Databases
 
-This repo contains 3 routers that connect to 2 MongoDB collections. These are as follows:
+This repo contains 5 routers that connect to 4 MongoDB collections. These are as follows:
 
 - /api/employees - contains personal information about company employees (`name`, `phone`, `email`, `department`, `startDate`, `employmentType`, `_id`)
+- /api/expenses - contains personal information about employee expenses (`merchant`, `date`, `amount`, `currency`, `status`, `employee`, `_id`)
+- /api/vacation - contains personal information about employee vacation (`startOn`, `endOn`, `employee`, `daysLeft`, `status`, `_id`)
 - /api/users - contains log in information about signed-up users (`_id`, `name`, `email`, `createdAt`, `updatedAt`)
 - /api/login - allows logging into the application, by providing `username` and `password`
 
@@ -36,6 +38,28 @@ See 'Endpoints' section for more information (WIP).
 │   └── DELETE /:userId
 │
 │   └── PUT /:userId
+│
+├── /expenses
+│   └── GET
+│       ├── /
+│       └── /:expenseId
+│
+│   └── POST /
+│
+│   └── DELETE /:expenseId
+│
+│   └── PUT /:expenseId
+│
+├── /vacation
+│   └── GET
+│       ├── /
+│       └── /:vacationId
+│
+│   └── POST /
+│
+│   └── DELETE /:vacationId
+│
+│   └── PUT /:vacationId
 │
 ├── /employees
 │   └── GET
@@ -206,9 +230,9 @@ See 'Endpoints' section for more information (WIP).
 }
 ```
 
-## Creating and Editing Employees
+## Creating and Editing Entries
 
-To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections. When performing a `POST` request to `/api/employees`, the employee is added under the corresponding manager (which is inferred based on the logged in user). In conjuction with the frontend, only employees of this manager's line are displayed. `DELETE` or `PUT` requests that provide the correct `:id` but involve a different manager are not allowed (the API leverages JWT authentication).
+To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections. When performing a `POST` request to `/api/employees`, the employee is added under the corresponding manager (which is inferred based on the logged in user). The same applies to expense and vacation entries (on entering the name, the entry is linked to the employee entry). `DELETE` or `PUT` requests that provide the correct `:id` but involve a different account are not allowed (the API leverages JWT authentication).
 
 ## Tech Stack
 
