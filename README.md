@@ -15,12 +15,12 @@ You can also use the source code from this repo; however, you need the secret va
 
 ## Databases
 
-This repo contains 5 routers that connect to 4 MongoDB collections. These are as follows:
+This repo contains 6 routers that connect to 4 MongoDB collections. These are as follows:
 
 - /api/employees - contains personal information about company employees (`name`, `phone`, `email`, `department`, `startDate`, `employmentType`, `_id`)
 - /api/expenses - contains personal information about employee expenses (`merchant`, `date`, `amount`, `currency`, `status`, `employee`, `_id`)
 - /api/vacation - contains personal information about employee vacation (`startOn`, `endOn`, `employee`, `daysLeft`, `status`, `_id`)
-- /api/users - contains log in information about signed-up users (`_id`, `name`, `email`, `createdAt`, `updatedAt`)
+- /api/users - contains log in information about signed-up users (`_id`, `name`, `email`, `createdAt`, `updatedAt`) and also allows creating accounts, by providing `fullName`, `username`, `email` and `password`
 - /api/login - allows logging into the application, by providing `username` and `password`
 
 See 'Endpoints' section for more information (WIP).
@@ -112,6 +112,24 @@ See 'Endpoints' section for more information (WIP).
   updatedAt: String
  }
 ]
+```
+
+### POST `/api/users`
+
+```
+// req.body
+{
+  fullName: String,
+  username: String,
+  password: String,
+  passwordConfirmation: String,
+  email: String
+}
+
+// res.body
+{
+  status: 200
+}
 ```
 
 ### GET `/api/users/:userId`
@@ -234,7 +252,11 @@ See 'Endpoints' section for more information (WIP).
 
 ## Creating and Editing Entries
 
-To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections. When performing a `POST` request to `/api/employees`, the employee is added under the corresponding manager (which is inferred based on the logged in user). The same applies to expense and vacation entries (on entering the name, the entry is linked to the employee entry). `DELETE` or `PUT` requests that provide the correct `:id` but involve a different account are not allowed (the API leverages JWT authentication).
+Start with logging in (sending a POST request to `/api/login`), or by signing up (sending a POST request to `/api/users`). See above for what the payload should be and what the responses should be. In case you sign up for a new account, you need to log in afterwards.
+
+To begin with, a user needs to sign up, or log in. Each user is assumed to be a line manager, managing employees. Each manager is assigned their own employees and they are only allowed to perform requests involving those instances in the collections.
+
+When performing a `POST` request to `/api/employees`, the employee is added under the corresponding manager (which is inferred based on the logged in user). The same applies to expense and vacation entries (on entering the name, the entry is linked to the employee entry). `DELETE` or `PUT` requests that provide the correct `:id` but involve a different account are not allowed (the API leverages JWT authentication). To complete requests that require authentication, you can use the `accessToken` that is returnt when logging in, through an Authorization Header.
 
 ## Tech Stack
 
