@@ -4,7 +4,7 @@ Employeeasy Server is the backend to the employeeasy app. It connects to a Mongo
 
 ## Installation
 
-There are two ways to try out the API. The first one is to use the deployed version found [here](https://tranquil-caverns-72557.herokuapp.com/). You can make all types of request and you can also hook it up to a personal app if you so please.
+There are two ways to try out the API. The first one is to use the deployed version found [here](https://tranquil-caverns-72557.herokuapp.com/). You can make all types of requests and you can also hook it up to a personal app if you so please.
 
 You can also use the source code from this repo; however, you need the secret variables. In that case, you can contact me and I can grant you access to the collection. After that:
 
